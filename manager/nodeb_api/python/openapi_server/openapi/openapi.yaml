@@ -1,0 +1,145 @@
+openapi: 3.0.2
+info:
+  title: UE Manager API
+  version: "1.0"
+servers:
+- url: https://api.server.test/v1
+tags:
+- description: Testing endpoints
+  name: Testing
+- description: APIs for UE management
+  name: UE Management
+- description: APIs for E2 Node management
+  name: E2 Node Management
+paths:
+  /E2Node/{node_id}:
+    delete:
+      operationId: e2_node_node_id_delete
+      parameters:
+      - description: The ID of the E2Node to unregister
+        explode: false
+        in: path
+        name: node_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: E2Node Unregister successfully
+        "400":
+          description: Bad Request. Missing or invalid parameters.
+        "404":
+          description: Not Found. E2Node not found.
+        "500":
+          description: Internal Server Error. E2Node unregistration failed.
+      summary: Unregister a E2Node
+      tags:
+      - E2 Node Management
+      x-openapi-router-controller: openapi_server.controllers.e2_node_management_controller
+    put:
+      description: "If the node_id exists, update the existing E2Node. Otherwise,\
+        \ register a new E2Node with the given node_id."
+      operationId: e2_node_node_id_put
+      parameters:
+      - description: node_id
+        explode: false
+        in: path
+        name: node_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        "200":
+          description: E2Node updated successfully
+        "201":
+          description: E2Node registered successfully
+        "400":
+          description: Bad Request. Missing or invalid parameters.
+        "500":
+          description: Internal Server Error. E2Node creation or update failed.
+      summary: Register or update a E2Node
+      tags:
+      - E2 Node Management
+      x-openapi-router-controller: openapi_server.controllers.e2_node_management_controller
+  /UE/disconnect:
+    delete:
+      operationId: u_e_disconnect_delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_UE_disconnect_delete_request'
+        required: true
+      responses:
+        "200":
+          description: UE disconnected successfully
+        "400":
+          description: Bad Request. Missing or invalid parameters.
+        "404":
+          description: Not Found. UE not found.
+        "500":
+          description: Internal Server Error. Disconnection failed.
+      summary: Disconnect UE
+      tags:
+      - UE Management
+      x-openapi-router-controller: openapi_server.controllers.ue_management_controller
+  /UE/handover:
+    post:
+      operationId: u_e_handover_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_UE_handover_post_request'
+        required: true
+      responses:
+        "200":
+          description: Handover initiated successfully
+        "400":
+          description: Bad Request. Missing or invalid parameters.
+        "500":
+          description: Internal Server Error. Handover failed.
+      summary: Initiate UE handover
+      tags:
+      - UE Management
+      x-openapi-router-controller: openapi_server.controllers.ue_management_controller
+  /test:
+    get:
+      operationId: test_get
+      responses:
+        "200":
+          description: API is reachable
+      summary: Test API connectivity
+      tags:
+      - Testing
+      x-openapi-router-controller: openapi_server.controllers.testing_controller
+components:
+  schemas:
+    _UE_disconnect_delete_request:
+      properties:
+        imsi:
+          description: The International Mobile Subscriber Identity of the UE to disconnect
+          title: imsi
+          type: string
+      title: _UE_disconnect_delete_request
+      type: object
+    _UE_handover_post_request:
+      properties:
+        imsi:
+          description: The International Mobile Subscriber Identity of the UE
+          title: imsi
+          type: string
+        gnbId:
+          description: The gNB ID to which the UE is being handed over
+          title: gnbId
+          type: string
+      title: _UE_handover_post_request
+      type: object
