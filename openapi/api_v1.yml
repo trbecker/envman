@@ -1,0 +1,197 @@
+openapi: '3.0.2'
+info:
+  title: E2 Node UE API
+  version: '1.0'
+servers:
+  - url: https://api.server.test/v1
+tags:
+  - name: Testing
+    description: Testing endpoints
+  - name: UE Management
+    description: APIs for UE management
+
+components:
+  schemas:
+    nodeb_descriptor:
+      type: object
+      properties:
+        nodeb_id:
+          type: string
+      required:
+        - nodeb_id
+
+    anr_payload:
+      type: object
+      properties:
+        nodeb:
+          $ref: "#/components/schemas/nodeb_descriptor"
+        RSRP:
+          type: number
+        RSRQ:
+          type: number
+        SINR:
+          type: number
+        CQI:
+          type: number
+        BLER:
+          type: number
+
+    data_plane_flow:
+      type: object
+      properties:
+        averageThroughput:
+          type: number
+        latency:
+          type: number
+
+    ue_descriptor:
+      type: object
+      properties:
+        data_plane_flow:
+          $ref: "#/components/schemas/data_plane_flow"
+        anr_payload:
+          type: array
+          items:
+            $ref: "#/components/schemas/anr_payload"
+
+
+paths:
+  /test:
+    get:
+      tags:
+        - Testing
+      summary: Test API connectivity
+      responses:
+        '200':
+          description: API is reachable
+
+  /UE/{iMSI}/admission:
+    put:
+      tags:
+        - Management
+      summary: Connects a UE to a nodeb
+      parameters:
+        - name: iMSI
+          in: path
+          required: true
+          schema:
+            type: string
+            description: International Mobile Subscriber Identification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ue_descriptor"
+      responses:
+        "200":
+          description: UE is connected
+
+    delete:
+      tags:
+        - Management
+      summary: Disconnects a UE from a nodeb
+      parameters:
+        - name: iMSI
+          in: path
+          required: true
+          schema:
+            type: string
+            description: International Mobile Subscriber Identification
+      responses:
+        "200":
+          description: UE disconnected
+
+  /UE/{iMSI}/anr:
+    put:
+      summary: Update ANR data
+      tags:
+        - Management
+      parameters:
+        - name: iMSI
+          in: path
+          required: true
+          schema:
+            type: string
+            description: International Mobile Subscriber Identification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                nodeb_list:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/anr_payload"
+      responses:
+        "200":
+          description: ANR data updated correctly
+
+  /UE/{iMSI}/flow:
+    put:
+      summary: update Data Plane Information
+      tags:
+        - Management
+      parameters:
+        - name: iMSI
+          in: path
+          required: true
+          schema:
+            type: string
+            description: International Mobile Subscriber Identification
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                flow:
+                  $ref: "#/components/schemas/data_plane_flow"
+      responses:
+        "200":
+          description: Flow updated
+
+  /UE/{iMSI}/info:
+    get:
+      tags:
+        - Monitoring
+      summary: Get the information of the UE associated with the NodeB
+      parameters:
+        - name: iMSI
+          in: path
+          required: true
+          schema:
+            type: string
+            description: International Mobile Subscriber Identification
+      responses:
+        "200":
+          description: UE info provided
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ue_descriptor"
+        "404":
+          description: UE not found
+  
+  /UE:
+    get:
+      summary: Get the list of UEs connected to the NodeB
+      tags:
+        - Monitoring
+      responses:
+        "200":
+          description: UE list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    iMSI:
+                      type: string
+
+# E2Node: gets the e2node information and data updates

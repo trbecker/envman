@@ -32,8 +32,4 @@ RUN git clone --depth 1 https://github.com/nlohmann/json.git /json && mkdir -p /
 
 COPY . /playpen/
 
-RUN mkdir simulator/build -p && cd simulator/build && cmake .. && make && make install
-
-RUN cd manager/nodeb_api/python &&  pip install  -r requirements.txt && pip install .
-
-RUN  cd manager/ue_api/python && pip install -r  requirements.txt &&  pip  install  .
+RUN mkdir api_v1/server/build -p && cd api_v1/server/build && cmake .. && make && make install
