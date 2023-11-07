@@ -4,8 +4,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data_plane_flow** | [**DataPlaneFlow**](DataPlaneFlow.md) |  | [optional] 
-**anr_payload** | [**List[AnrPayload]**](AnrPayload.md) |  | [optional] 
+**data_plane_flow** | [**DataPlaneFlow**](DataPlaneFlow.md) |  | 
+**anr_payload** | [**List[AnrPayload]**](AnrPayload.md) |  | 
+**endpoint** | **str** | Endpoint url to send operation to an UE | 
 
 ## Example
 

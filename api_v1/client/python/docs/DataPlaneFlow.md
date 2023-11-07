@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**average_throughput** | **float** |  | [optional] 
-**latency** | **float** |  | [optional] 
+**average_throughput** | **float** |  | 
+**latency** | **float** |  | 
 
 ## Example
 

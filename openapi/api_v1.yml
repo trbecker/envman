@@ -1,6 +1,6 @@
 openapi: '3.0.2'
 info:
-  title: E2 Node UE API
+  title: E2 Node API
   version: '1.0'
 servers:
   - url: https://api.server.test/v1
@@ -9,6 +9,8 @@ tags:
     description: Testing endpoints
   - name: UE Management
     description: APIs for UE management
+  - name: Debugging
+    description: Debugging endpoints
 
 components:
   schemas:
@@ -35,6 +37,13 @@ components:
           type: number
         BLER:
           type: number
+      required:
+        - nodeb
+        - RSRP
+        - RSRQ
+        - SINR
+        - CQI
+        - BLER
 
     data_plane_flow:
       type: object
@@ -43,6 +52,9 @@ components:
           type: number
         latency:
           type: number
+      required:
+        - averageThroughput
+        - latency
 
     ue_descriptor:
       type: object
@@ -53,6 +65,14 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/anr_payload"
+        endpoint:
+          type: string
+          description: Endpoint url to send operation to an UE
+          example: http://ue_manager_host:port/iMSI
+      required:
+        - data_plane_flow
+        - anr_payload
+        - endpoint
 
 
 paths:
@@ -157,7 +177,7 @@ paths:
   /UE/{iMSI}/info:
     get:
       tags:
-        - Monitoring
+        - Debugging
       summary: Get the information of the UE associated with the NodeB
       parameters:
         - name: iMSI
@@ -172,7 +192,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ue_descriptor"
+                properties:
+                  info:
+                    $ref: "#/components/schemas/ue_descriptor"
         "404":
           description: UE not found
   
@@ -180,18 +202,15 @@ paths:
     get:
       summary: Get the list of UEs connected to the NodeB
       tags:
-        - Monitoring
+        - Debugging
       responses:
         "200":
           description: UE list
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    iMSI:
+                properties:
+                  ue_list:
+                    type: array
+                    items:
                       type: string
-
-# E2Node: gets the e2node information and data updates

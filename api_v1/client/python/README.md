@@ -66,14 +66,15 @@ configuration = openapi_client.Configuration(
 # Enter a context with an instance of the API client
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ManagementApi(api_client)
-    i_msi = 'i_msi_example' # str | 
+    api_instance = openapi_client.DebuggingApi(api_client)
 
     try:
-        # Disconnects a UE from a nodeb
-        api_instance.u_eimsi_admission_delete(i_msi)
+        # Get the list of UEs connected to the NodeB
+        api_response = api_instance.u_e_get()
+        print("The response of DebuggingApi->u_e_get:\n")
+        pprint(api_response)
     except ApiException as e:
-        print("Exception when calling ManagementApi->u_eimsi_admission_delete: %s\n" % e)
+        print("Exception when calling DebuggingApi->u_e_get: %s\n" % e)
 
 ```
 
@@ -83,12 +84,12 @@ All URIs are relative to *https://api.server.test/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DebuggingApi* | [**u_e_get**](docs/DebuggingApi.md#u_e_get) | **GET** /UE | Get the list of UEs connected to the NodeB
+*DebuggingApi* | [**u_eimsi_info_get**](docs/DebuggingApi.md#u_eimsi_info_get) | **GET** /UE/{iMSI}/info | Get the information of the UE associated with the NodeB
 *ManagementApi* | [**u_eimsi_admission_delete**](docs/ManagementApi.md#u_eimsi_admission_delete) | **DELETE** /UE/{iMSI}/admission | Disconnects a UE from a nodeb
 *ManagementApi* | [**u_eimsi_admission_put**](docs/ManagementApi.md#u_eimsi_admission_put) | **PUT** /UE/{iMSI}/admission | Connects a UE to a nodeb
 *ManagementApi* | [**u_eimsi_anr_put**](docs/ManagementApi.md#u_eimsi_anr_put) | **PUT** /UE/{iMSI}/anr | Update ANR data
 *ManagementApi* | [**u_eimsi_flow_put**](docs/ManagementApi.md#u_eimsi_flow_put) | **PUT** /UE/{iMSI}/flow | update Data Plane Information
-*MonitoringApi* | [**u_e_get**](docs/MonitoringApi.md#u_e_get) | **GET** /UE | Get the list of UEs connected to the NodeB
-*MonitoringApi* | [**u_eimsi_info_get**](docs/MonitoringApi.md#u_eimsi_info_get) | **GET** /UE/{iMSI}/info | Get the information of the UE associated with the NodeB
 *TestingApi* | [**test_get**](docs/TestingApi.md#test_get) | **GET** /test | Test API connectivity
 
 
@@ -97,9 +98,10 @@ Class | Method | HTTP request | Description
  - [AnrPayload](docs/AnrPayload.md)
  - [DataPlaneFlow](docs/DataPlaneFlow.md)
  - [NodebDescriptor](docs/NodebDescriptor.md)
- - [UEGet200ResponseInner](docs/UEGet200ResponseInner.md)
+ - [UEGet200Response](docs/UEGet200Response.md)
  - [UEIMSIAnrPutRequest](docs/UEIMSIAnrPutRequest.md)
  - [UEIMSIFlowPutRequest](docs/UEIMSIFlowPutRequest.md)
+ - [UEIMSIInfoGet200Response](docs/UEIMSIInfoGet200Response.md)
  - [UeDescriptor](docs/UeDescriptor.md)
 
 

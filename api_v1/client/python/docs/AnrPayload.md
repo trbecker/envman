@@ -4,12 +4,12 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**nodeb** | [**NodebDescriptor**](NodebDescriptor.md) |  | [optional] 
-**rsrp** | **float** |  | [optional] 
-**rsrq** | **float** |  | [optional] 
-**sinr** | **float** |  | [optional] 
-**cqi** | **float** |  | [optional] 
-**bler** | **float** |  | [optional] 
+**nodeb** | [**NodebDescriptor**](NodebDescriptor.md) |  | 
+**rsrp** | **float** |  | 
+**rsrq** | **float** |  | 
+**sinr** | **float** |  | 
+**cqi** | **float** |  | 
+**bler** | **float** |  | 
 
 ## Example
 

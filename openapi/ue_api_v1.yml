@@ -1,0 +1,56 @@
+openapi: '3.0.2'
+info:
+  title: UE Control API
+  version: '1.0'
+servers:
+  - url: https://api.server.test/v1
+tags:
+  - name: Testing
+    description: Testing endpoints
+  - name: UE Management
+    description: APIs for UE management
+
+paths:
+  /test:
+    get:
+      responses:
+        "200":
+          description: "API is reachable"
+  /UE/{iMSI}/test:
+    put:
+      parameters:
+        - name: iMSI
+          in: path
+          required: true
+          schema:
+            type: string
+            description: International Mobile Subscriber Identification
+      responses:
+        "200": 
+          description: UE exists
+
+  /UE/{iMSI}/handover:
+    put:
+      parameters:
+        - name: iMSI
+          in: path
+          required: true
+          schema:
+            type: string
+            description: International Mobile Subscriber Identification
+      responses:
+        "200": 
+          description: Handover received
+
+  /UE/{iMSI}/disconnect:
+    put:
+      parameters:
+        - name: iMSI
+          in: path
+          required: true
+          schema:
+            type: string
+            description: International Mobile Subscriber Identification
+      responses:
+        "200": 
+          description: Disconnected
