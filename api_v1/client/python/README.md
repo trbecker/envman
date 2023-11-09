@@ -90,6 +90,7 @@ Class | Method | HTTP request | Description
 *ManagementApi* | [**u_eimsi_admission_put**](docs/ManagementApi.md#u_eimsi_admission_put) | **PUT** /UE/{iMSI}/admission | Connects a UE to a nodeb
 *ManagementApi* | [**u_eimsi_anr_put**](docs/ManagementApi.md#u_eimsi_anr_put) | **PUT** /UE/{iMSI}/anr | Update ANR data
 *ManagementApi* | [**u_eimsi_flow_put**](docs/ManagementApi.md#u_eimsi_flow_put) | **PUT** /UE/{iMSI}/flow | update Data Plane Information
+*TestingApi* | [**endpoints_get**](docs/TestingApi.md#endpoints_get) | **GET** /endpoints | Returns a list of endpoints
 *TestingApi* | [**test_get**](docs/TestingApi.md#test_get) | **GET** /test | Test API connectivity
 
 
@@ -97,6 +98,8 @@ Class | Method | HTTP request | Description
 
  - [AnrPayload](docs/AnrPayload.md)
  - [DataPlaneFlow](docs/DataPlaneFlow.md)
+ - [EndpointsGet200Response](docs/EndpointsGet200Response.md)
+ - [EndpointsGet200ResponseEndpointsInner](docs/EndpointsGet200ResponseEndpointsInner.md)
  - [NodebDescriptor](docs/NodebDescriptor.md)
  - [UEGet200Response](docs/UEGet200Response.md)
  - [UEIMSIAnrPutRequest](docs/UEIMSIAnrPutRequest.md)

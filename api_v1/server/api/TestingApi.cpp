@@ -17,7 +17,7 @@ namespace org::openapitools::server::api
 {
 
 using namespace org::openapitools::server::helpers;
-
+using namespace org::openapitools::server::model;
 
 const std::string TestingApi::base = "/v1";
 
@@ -33,6 +33,7 @@ void TestingApi::init() {
 void TestingApi::setupRoutes() {
     using namespace Pistache::Rest;
 
+    Routes::Get(*router, base + "/endpoints", Routes::bind(&TestingApi::endpoints_get_handler, this));
     Routes::Get(*router, base + "/test", Routes::bind(&TestingApi::test_get_handler, this));
 
     // Default handler, called when a route is not found
@@ -57,6 +58,26 @@ std::pair<Pistache::Http::Code, std::string> TestingApi::handleOperationExceptio
     return std::make_pair(Pistache::Http::Code::Internal_Server_Error, ex.what());
 }
 
+void TestingApi::endpoints_get_handler(const Pistache::Rest::Request &, Pistache::Http::ResponseWriter response) {
+    try {
+
+
+    try {
+        this->endpoints_get(response);
+    } catch (Pistache::Http::HttpError &e) {
+        response.send(static_cast<Pistache::Http::Code>(e.code()), e.what());
+        return;
+    } catch (std::exception &e) {
+        const std::pair<Pistache::Http::Code, std::string> errorInfo = this->handleOperationException(e);
+        response.send(errorInfo.first, errorInfo.second);
+        return;
+    }
+
+    } catch (std::exception &e) {
+        response.send(Pistache::Http::Code::Internal_Server_Error, e.what());
+    }
+
+}
 void TestingApi::test_get_handler(const Pistache::Rest::Request &, Pistache::Http::ResponseWriter response) {
     try {
 

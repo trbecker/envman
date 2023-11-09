@@ -16,6 +16,8 @@
 # import models into model package
 from openapi_client.models.anr_payload import AnrPayload
 from openapi_client.models.data_plane_flow import DataPlaneFlow
+from openapi_client.models.endpoints_get200_response import EndpointsGet200Response
+from openapi_client.models.endpoints_get200_response_endpoints_inner import EndpointsGet200ResponseEndpointsInner
 from openapi_client.models.nodeb_descriptor import NodebDescriptor
 from openapi_client.models.ue_get200_response import UEGet200Response
 from openapi_client.models.ueimsi_anr_put_request import UEIMSIAnrPutRequest

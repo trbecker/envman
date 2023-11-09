@@ -6,6 +6,8 @@ README.md
 docs/AnrPayload.md
 docs/DataPlaneFlow.md
 docs/DebuggingApi.md
+docs/EndpointsGet200Response.md
+docs/EndpointsGet200ResponseEndpointsInner.md
 docs/ManagementApi.md
 docs/NodebDescriptor.md
 docs/TestingApi.md
@@ -27,6 +29,8 @@ openapi_client/exceptions.py
 openapi_client/models/__init__.py
 openapi_client/models/anr_payload.py
 openapi_client/models/data_plane_flow.py
+openapi_client/models/endpoints_get200_response.py
+openapi_client/models/endpoints_get200_response_endpoints_inner.py
 openapi_client/models/nodeb_descriptor.py
 openapi_client/models/ue_descriptor.py
 openapi_client/models/ue_get200_response.py
@@ -41,4 +45,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_endpoints_get200_response_endpoints_inner.py
 tox.ini

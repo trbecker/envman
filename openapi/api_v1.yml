@@ -85,6 +85,31 @@ paths:
         '200':
           description: API is reachable
 
+  /endpoints:
+    get:
+      tags:
+        - Testing
+      summary: Returns a list of endpoints
+      responses:
+        "200": 
+          description: List of endpoints
+          content:
+            application/json:
+              schema:
+                properties:
+                  endpoints:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        method:
+                          type: string
+                        uri:
+                          type: string
+                        description: 
+                          type: string
+
+
   /UE/{iMSI}/admission:
     put:
       tags:

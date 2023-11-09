@@ -24,10 +24,11 @@
 #include <pistache/http.h>
 #include <pistache/router.h>
 #include <pistache/http_headers.h>
-#include <nlohmann/json.hpp>
+
 #include <optional>
 #include <utility>
 
+#include "_endpoints_get_200_response.h"
 
 namespace org::openapitools::server::api
 {
@@ -43,6 +44,7 @@ public:
 private:
     void setupRoutes();
 
+    void endpoints_get_handler(const Pistache::Rest::Request &request, Pistache::Http::ResponseWriter response);
     void test_get_handler(const Pistache::Rest::Request &request, Pistache::Http::ResponseWriter response);
     void testing_api_default_handler(const Pistache::Rest::Request &request, Pistache::Http::ResponseWriter response);
 
@@ -60,6 +62,13 @@ private:
     /// </summary>
     virtual std::pair<Pistache::Http::Code, std::string> handleOperationException(const std::exception& ex) const noexcept;
 
+    /// <summary>
+    /// Returns a list of endpoints
+    /// </summary>
+    /// <remarks>
+    /// 
+    /// </remarks>
+    virtual void endpoints_get(Pistache::Http::ResponseWriter &response) = 0;
     /// <summary>
     /// Test API connectivity
     /// </summary>
