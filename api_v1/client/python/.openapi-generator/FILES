@@ -45,5 +45,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_endpoints_get200_response_endpoints_inner.py
 tox.ini

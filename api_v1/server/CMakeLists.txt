@@ -9,23 +9,19 @@ link_directories(${EXTERNAL_INSTALL_LOCATION}/lib)
 
 include_directories(model)
 include_directories(api)
-include_directories(impl)
+include_directories(src)
 
 file(GLOB SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/api/*.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/impl/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/model/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
 )
-
-set(PUBLIC_INCUDE_DIR )
 
 add_library(${PROJECT_NAME} STATIC ${SRCS})
 target_link_libraries(${PROJECT_NAME} pistache pthread)
 install(TARGETS ${PROJECT_NAME}
 	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
-file(GLOB API_H ${CMAKE_CURRENT_SOURCE_DIR}/api/*.h)
-file(GLOB MODEL_H ${CMAKE_CURRENT_SOURCE_DIR}/model/*.h)
+file(GLOB HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/src/environment_manager.h)
 
-install(FILES ${API_H} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/envman/api)
-install(FILES ${MODEL_H} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/envman/model)
+install(FILES ${HEADERS} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/envman/)
