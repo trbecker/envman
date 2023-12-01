@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <thread>
+#include <vector>
 
 class anr_entry {
 public:
@@ -32,6 +33,12 @@ public:
 
 extern std::map<std::string, std::shared_ptr<ue_data>> ue_map;
 
+#define ENVMAN_OBSERVE_ANR (1 << 0)
+#define ENVMAN_OBSERVE_FLOW (1 << 1)
+#define ENVMAN_OBSERVE_ADMISSION (1 << 2)
+
+#define ENVMAN_OBSERVE_ALL (ENVMAN_OBSERVE_ADMISSION | ENVMAN_OBSERVE_ANR | ENVMAN_OBSERVE_FLOW)
+
 class EnvironmentManagerObserver {
 public:
 	EnvironmentManagerObserver() { /* pass */ };
@@ -59,17 +66,31 @@ public:
 	virtual void disassociationRequest(const std::shared_ptr<ue_data> ue) = 0;
 };
 
+typedef std::pair<std::shared_ptr<EnvironmentManagerObserver>, uint32_t> ObserverAndType;
+typedef std::vector<ObserverAndType> ObserverList;
+
+static inline const std::shared_ptr<EnvironmentManagerObserver> &observer(const ObserverAndType &ot)
+{
+	return ot.first;
+}
+
+static inline const uint32_t observed_event(const ObserverAndType &ot)
+{
+	return ot.second;
+}
+
 class EnvironmentManager {
 public:
-	EnvironmentManager(uint16_t port, uint16_t threads,
-		std::shared_ptr<EnvironmentManagerObserver> observer);
+	EnvironmentManager(uint16_t port, uint16_t threads);
 	~EnvironmentManager();
 
 	void start();
 	void stop();
 
+	void add_observer(std::shared_ptr<EnvironmentManagerObserver> observer, uint32_t type);
+
 protected:
-	std::shared_ptr<EnvironmentManagerObserver> observer;
+	std::shared_ptr<ObserverList> observers;
 	uint16_t port;
 	uint16_t threads;
 };

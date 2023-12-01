@@ -5,7 +5,7 @@
 
 class api_config {
 public:
-    std::shared_ptr<EnvironmentManagerObserver> observer;
+    std::shared_ptr<ObserverList> observers;
     uint16_t port;
     uint16_t threads;
 };

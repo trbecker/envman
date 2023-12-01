@@ -161,7 +161,7 @@ namespace org::openapitools::server::api
     class ManagementApiImpl : public org::openapitools::server::api::ManagementApi
     {
     public:
-        explicit ManagementApiImpl(const std::shared_ptr<Pistache::Rest::Router> &rtr, std::shared_ptr<EnvironmentManagerObserver> observer);
+        explicit ManagementApiImpl(const std::shared_ptr<Pistache::Rest::Router> &rtr, std::shared_ptr<ObserverList> observers);
         ~ManagementApiImpl() override = default;
 
         void u_eimsi_admission_delete(const std::string &iMSI, Pistache::Http::ResponseWriter &response);
@@ -170,11 +170,11 @@ namespace org::openapitools::server::api
         void u_eimsi_flow_put(const std::string &iMSI, const _UE__iMSI__flow_put_request &uEIMSIFlowPutRequest, Pistache::Http::ResponseWriter &response);
 
     protected:
-        std::shared_ptr<EnvironmentManagerObserver> observer;
+        std::shared_ptr<ObserverList> observers;
     };
 
-    ManagementApiImpl::ManagementApiImpl(const std::shared_ptr<Pistache::Rest::Router> &rtr, std::shared_ptr<EnvironmentManagerObserver> observer)
-        : ManagementApi(rtr), observer(observer)
+    ManagementApiImpl::ManagementApiImpl(const std::shared_ptr<Pistache::Rest::Router> &rtr, std::shared_ptr<ObserverList> observers)
+        : ManagementApi(rtr), observers(observers)
     { /* pass */
     }
     void ManagementApiImpl::u_eimsi_admission_delete(const std::string &iMSI, Pistache::Http::ResponseWriter &response)
@@ -186,7 +186,10 @@ namespace org::openapitools::server::api
             return;
         }
 
-        observer->disassociationRequest(ue_it->second);
+        for (auto it = observers->begin(); it != observers->end(); it++)
+            if (observed_event(*it) & ENVMAN_OBSERVE_ADMISSION)
+                observer(*it)->disassociationRequest(ue_it->second);
+
         ue_map.erase(iMSI);
         response.send(Pistache::Http::Code::Ok);
     }
@@ -206,7 +209,9 @@ namespace org::openapitools::server::api
         fill_anr_entry(data->anr, anr_vector);
         to_insert.second = data;
 
-        observer->associationRequest(data);
+        for (auto it = observers->begin(); it != observers->end(); it++)
+            if (observed_event(*it) & ENVMAN_OBSERVE_ADMISSION)
+                observer(*it)->associationRequest(data);
 
         ue_map.emplace(to_insert);
 
@@ -226,7 +231,9 @@ namespace org::openapitools::server::api
 
         fill_anr_entry(ue->second->anr, uEIMSIAnrPutRequest.getNodebList());
 
-        observer->anrUpdate(ue->first, ue->second->anr);
+        for (auto it = observers->begin(); it != observers->end(); it++)
+            if (observed_event(*it) & ENVMAN_OBSERVE_ANR)
+                observer(*it)->anrUpdate(ue->first, ue->second->anr);
 
         //logger_force(LOGGER_INFO, "ANR data for UE %s changed",
         //             ue->second->imsi.c_str);
@@ -248,7 +255,9 @@ namespace org::openapitools::server::api
         //logger_force(LOGGER_INFO, "Flow parameters for UE %s changed",
         //             ue->second->imsi.c_str);
 
-        observer->flowUpdate(ue->first, ue->second->flow);
+        for (auto it = observers->begin(); it != observers->end(); it++)
+            if (observed_event(*it) & ENVMAN_OBSERVE_FLOW)
+                observer(*it)->flowUpdate(ue->first, ue->second->flow);
 
         response.send(Pistache::Http::Code::Ok);
     }
@@ -349,7 +358,7 @@ void run_api(std::shared_ptr<api_config> config)
     httpEndpoint->init(opts);
     auto apiImpls = std::vector<std::shared_ptr<ApiBase>>();
 
-    apiImpls.push_back(std::make_shared<ManagementApiImpl>(router, config->observer));
+    apiImpls.push_back(std::make_shared<ManagementApiImpl>(router, config->observers));
     apiImpls.push_back(std::make_shared<TestingApiImpl>(router));
     apiImpls.push_back(std::make_shared<MonitoringApiImpl>(router));
 
