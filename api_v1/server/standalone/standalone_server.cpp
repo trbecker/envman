@@ -116,6 +116,7 @@ static void setUpUnixSignals(std::vector<int> quitSignals)
 int main()
 {
     std::shared_ptr<MyObserver> observer = std::make_shared<MyObserver>();
-    manager = new EnvironmentManager(8081, 2, observer);
+    manager = new EnvironmentManager(8081, 2);
+    manager->add_observer(observer, ENVMAN_OBSERVE_ALL);
     manager->start();
 }
