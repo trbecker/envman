@@ -21,3 +21,5 @@ COPY . /playpen/
 
 RUN mkdir -p build && cd build && cmake .. && make -j4 && make install && ldconfig
 RUN mkdir standalone/build && cd standalone/build && cmake .. && make && make install
+
+ENTRYPOINT /usr/local/bin/api-server
