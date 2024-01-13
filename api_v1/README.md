@@ -21,7 +21,5 @@ python3 e2sim_client/e2sim_client.py connect http://<api-server-ip>:8081/v1/ <iM
 
 ## Disconnecting an UE
 ~~~
-
----
 python3 e2sim_client/e2sim_client.py disconnect http://<api-server>:8081/v1/ <iMSI>
 ~~~
