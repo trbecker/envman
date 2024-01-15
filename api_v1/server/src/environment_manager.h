@@ -88,6 +88,7 @@ public:
 	void stop();
 
 	void add_observer(std::shared_ptr<EnvironmentManagerObserver> observer, uint32_t type);
+	void delete_observer(std::shared_ptr<EnvironmentManagerObserver> observer);
 
 protected:
 	std::shared_ptr<ObserverList> observers;

@@ -36,3 +36,13 @@ void EnvironmentManager::add_observer(std::shared_ptr<EnvironmentManagerObserver
     ObserverAndType entry(observer, event_type);
     observers->push_back(entry);
 }
+
+void EnvironmentManager::delete_observer(std::shared_ptr<EnvironmentManagerObserver> observer)
+{
+    auto it = observers->begin();
+    while(it != observers->end())
+        if (it->first == observer)
+            observers->erase(it);
+        else
+	    it++;
+}
