@@ -33,6 +33,15 @@ void EnvironmentManager::stop()
 void EnvironmentManager::add_observer(std::shared_ptr<EnvironmentManagerObserver> observer,
         uint32_t event_type)
 {
+    // Seek if the observer was added already.
+    for (auto it = observers->begin(); it != observers->end(); it++) {
+        if (it->first == observer) {
+            it->second |= event_type;
+	    return;
+	}
+    }
+
+    // No observer by pointer. Create a new one.
     ObserverAndType entry(observer, event_type);
     observers->push_back(entry);
 }

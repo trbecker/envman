@@ -9,6 +9,10 @@ public:
 	size_t observers_length() {
 		return observers->size();
 	}
+
+	ObserverAndType get_observer(int pos) {
+		return observers->at(pos);
+	}
 };
 
 class Observer : public EnvironmentManagerObserver {
@@ -40,9 +44,11 @@ int main(void)
 	EnvironmentManagerTest test(8081, 2);
 	test.add_observer(observer1, ENVMAN_OBSERVE_ANR);
 	test.add_observer(observer1, ENVMAN_OBSERVE_FLOW);
-	std::cout << "observers " << test.observers_length() << " expected 2" << std::endl;
+	std::cout << "observers " << test.observers_length() << " expected 1" << std::endl;
+	std::cout << "event_type " << test.get_observer(0).second << " expected " <<
+		(int)(ENVMAN_OBSERVE_ANR | ENVMAN_OBSERVE_FLOW) << std::endl;
 	test.delete_observer(observer2);
-	std::cout << "observers " << test.observers_length() << " expected 2" << std::endl;
+	std::cout << "observers " << test.observers_length() << " expected 1" << std::endl;
 	test.delete_observer(observer1);
 	std::cout << "observers " << test.observers_length() << " expected 0" << std::endl;
 	test.add_observer(observer1, ENVMAN_OBSERVE_ANR);
