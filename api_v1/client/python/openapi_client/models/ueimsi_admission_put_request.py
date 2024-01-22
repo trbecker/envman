@@ -17,23 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictFloat, StrictInt
-from typing import Any, ClassVar, Dict, List, Union
-from openapi_client.models.nodeb_descriptor import NodebDescriptor
+from pydantic import BaseModel, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from openapi_client.models.ue_descriptor import UeDescriptor
 from typing import Optional, Set
 from typing_extensions import Self
 
-class AnrPayload(BaseModel):
+class UEIMSIAdmissionPutRequest(BaseModel):
     """
-    AnrPayload
+    UEIMSIAdmissionPutRequest
     """ # noqa: E501
-    nodeb: NodebDescriptor
-    rsrp: Union[StrictFloat, StrictInt] = Field(alias="RSRP")
-    rsrq: Union[StrictFloat, StrictInt] = Field(alias="RSRQ")
-    sinr: Union[StrictFloat, StrictInt] = Field(alias="SINR")
-    cqi: Union[StrictFloat, StrictInt] = Field(alias="CQI")
-    bler: Union[StrictFloat, StrictInt] = Field(alias="BLER")
-    __properties: ClassVar[List[str]] = ["nodeb", "RSRP", "RSRQ", "SINR", "CQI", "BLER"]
+    nodeb: Optional[StrictStr] = None
+    ue: Optional[UeDescriptor] = None
+    __properties: ClassVar[List[str]] = ["nodeb", "ue"]
 
     model_config = {
         "populate_by_name": True,
@@ -53,7 +49,7 @@ class AnrPayload(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AnrPayload from a JSON string"""
+        """Create an instance of UEIMSIAdmissionPutRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,14 +70,14 @@ class AnrPayload(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of nodeb
-        if self.nodeb:
-            _dict['nodeb'] = self.nodeb.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of ue
+        if self.ue:
+            _dict['ue'] = self.ue.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AnrPayload from a dict"""
+        """Create an instance of UEIMSIAdmissionPutRequest from a dict"""
         if obj is None:
             return None
 
@@ -89,12 +85,8 @@ class AnrPayload(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "nodeb": NodebDescriptor.from_dict(obj["nodeb"]) if obj.get("nodeb") is not None else None,
-            "RSRP": obj.get("RSRP"),
-            "RSRQ": obj.get("RSRQ"),
-            "SINR": obj.get("SINR"),
-            "CQI": obj.get("CQI"),
-            "BLER": obj.get("BLER")
+            "nodeb": obj.get("nodeb"),
+            "ue": UeDescriptor.from_dict(obj["ue"]) if obj.get("ue") is not None else None
         })
         return _obj
 

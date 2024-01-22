@@ -39,13 +39,14 @@ def create_random_ue(imsi, seen_bbu_names):
             anr_payload = anr,
             endpoint = f"http://{ip}:8081/{imsi}")
 
-def ue_connect(server_url, imsi, ue):
+def ue_connect(server_url, imsi, ue, cell):
+    requestBody = e2sim_client.UEIMSIAdmissionPutRequest(ue=ue, nodeb=cell)
     configuration = e2sim_client.Configuration(
             host = server_url)
     with e2sim_client.ApiClient(configuration) as api_client:
         api_instance = e2sim_client.ManagementApi(api_client)
         try:
-            api_instance.u_eimsi_admission_put(imsi, ue)
+            api_instance.u_eimsi_admission_put(imsi, requestBody)
         except Exception as e:
             print("ManagementApi.u_eimsi_admission_put: %s\n" % e)
 
@@ -85,7 +86,7 @@ if __name__ == '__main__':
 
     if subcommand == 'connect':
         ue = create_random_ue(sys.argv[3], ['bbu1', 'bbu2', 'bbu3'])
-        ue_connect(sys.argv[2], sys.argv[3], ue)
+        print(ue_connect(sys.argv[2], sys.argv[3], ue, 'bbu1'))
     elif subcommand == 'disconnect':
         ue_disconnect(sys.argv[2], sys.argv[3])
     elif subcommand == 'update-anr':

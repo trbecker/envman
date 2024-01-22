@@ -15,9 +15,8 @@ Returns a list of endpoints
 
 ### Example
 
+
 ```python
-import time
-import os
 import openapi_client
 from openapi_client.models.endpoints_get200_response import EndpointsGet200Response
 from openapi_client.rest import ApiException
@@ -47,6 +46,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -63,6 +63,7 @@ No authorization required
  - **Accept**: application/json
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of endpoints |  -  |
@@ -76,9 +77,8 @@ Test API connectivity
 
 ### Example
 
+
 ```python
-import time
-import os
 import openapi_client
 from openapi_client.rest import ApiException
 from pprint import pprint
@@ -105,6 +105,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -121,6 +122,7 @@ No authorization required
  - **Accept**: Not defined
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | API is reachable |  -  |

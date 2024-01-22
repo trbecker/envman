@@ -50,7 +50,6 @@ Please follow the [installation procedure](#installation--usage) and then run th
 
 ```python
 
-import time
 import openapi_client
 from openapi_client.rest import ApiException
 from pprint import pprint
@@ -102,6 +101,7 @@ Class | Method | HTTP request | Description
  - [EndpointsGet200ResponseEndpointsInner](docs/EndpointsGet200ResponseEndpointsInner.md)
  - [NodebDescriptor](docs/NodebDescriptor.md)
  - [UEGet200Response](docs/UEGet200Response.md)
+ - [UEIMSIAdmissionPutRequest](docs/UEIMSIAdmissionPutRequest.md)
  - [UEIMSIAnrPutRequest](docs/UEIMSIAnrPutRequest.md)
  - [UEIMSIFlowPutRequest](docs/UEIMSIFlowPutRequest.md)
  - [UEIMSIInfoGet200Response](docs/UEIMSIInfoGet200Response.md)

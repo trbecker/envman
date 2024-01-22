@@ -2,6 +2,7 @@
 
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **endpoints** | [**List[EndpointsGet200ResponseEndpointsInner]**](EndpointsGet200ResponseEndpointsInner.md) |  | [optional] 

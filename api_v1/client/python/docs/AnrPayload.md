@@ -2,6 +2,7 @@
 
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **nodeb** | [**NodebDescriptor**](NodebDescriptor.md) |  | 

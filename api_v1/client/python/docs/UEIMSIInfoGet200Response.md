@@ -2,6 +2,7 @@
 
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **info** | [**UeDescriptor**](UeDescriptor.md) |  | [optional] 

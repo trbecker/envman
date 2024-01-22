@@ -44,7 +44,7 @@ public:
     /**
      * Notifies the observer about a new UE requessting association.
      */
-    void associationRequest(const std::shared_ptr<ue_data> ue);
+    bool associationRequest(const std::shared_ptr<ue_data> ue, const std::string &cell);
 
     /**
      * Notifiess the observer about a new UE requesting disassociation.
@@ -71,8 +71,10 @@ void MyObserver::flowUpdate(const std::string iMSI, const flow_entry &entry) {
               << " latency " << entry.latency << std::endl;
 }
 
-void MyObserver::associationRequest(const std::shared_ptr<ue_data> ue) {
-    std::cout << "Association request from " << ue->imsi << std::endl;
+bool MyObserver::associationRequest(const std::shared_ptr<ue_data> ue, const std::string &cell)
+{
+    std::cout << "Association request from " << ue->imsi << " to cell " << cell << std::endl;
+    return true;
 }
 
 void MyObserver::disassociationRequest(const std::shared_ptr<ue_data> ue)

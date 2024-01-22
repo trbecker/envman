@@ -17,9 +17,8 @@ Disconnects a UE from a nodeb
 
 ### Example
 
+
 ```python
-import time
-import os
 import openapi_client
 from openapi_client.rest import ApiException
 from pprint import pprint
@@ -48,6 +47,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **i_msi** | **str**|  | 
@@ -66,6 +66,7 @@ No authorization required
  - **Accept**: Not defined
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | UE disconnected |  -  |
@@ -73,17 +74,16 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **u_eimsi_admission_put**
-> u_eimsi_admission_put(i_msi, ue_descriptor)
+> u_eimsi_admission_put(i_msi, ueimsi_admission_put_request)
 
 Connects a UE to a nodeb
 
 ### Example
 
+
 ```python
-import time
-import os
 import openapi_client
-from openapi_client.models.ue_descriptor import UeDescriptor
+from openapi_client.models.ueimsi_admission_put_request import UEIMSIAdmissionPutRequest
 from openapi_client.rest import ApiException
 from pprint import pprint
 
@@ -99,11 +99,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.ManagementApi(api_client)
     i_msi = 'i_msi_example' # str | 
-    ue_descriptor = openapi_client.UeDescriptor() # UeDescriptor | 
+    ueimsi_admission_put_request = openapi_client.UEIMSIAdmissionPutRequest() # UEIMSIAdmissionPutRequest | 
 
     try:
         # Connects a UE to a nodeb
-        api_instance.u_eimsi_admission_put(i_msi, ue_descriptor)
+        api_instance.u_eimsi_admission_put(i_msi, ueimsi_admission_put_request)
     except Exception as e:
         print("Exception when calling ManagementApi->u_eimsi_admission_put: %s\n" % e)
 ```
@@ -112,10 +112,11 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **i_msi** | **str**|  | 
- **ue_descriptor** | [**UeDescriptor**](UeDescriptor.md)|  | 
+ **ueimsi_admission_put_request** | [**UEIMSIAdmissionPutRequest**](UEIMSIAdmissionPutRequest.md)|  | 
 
 ### Return type
 
@@ -131,6 +132,7 @@ No authorization required
  - **Accept**: Not defined
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | UE is connected |  -  |
@@ -144,9 +146,8 @@ Update ANR data
 
 ### Example
 
+
 ```python
-import time
-import os
 import openapi_client
 from openapi_client.models.ueimsi_anr_put_request import UEIMSIAnrPutRequest
 from openapi_client.rest import ApiException
@@ -177,6 +178,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **i_msi** | **str**|  | 
@@ -196,6 +198,7 @@ No authorization required
  - **Accept**: Not defined
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | ANR data updated correctly |  -  |
@@ -209,9 +212,8 @@ update Data Plane Information
 
 ### Example
 
+
 ```python
-import time
-import os
 import openapi_client
 from openapi_client.models.ueimsi_flow_put_request import UEIMSIFlowPutRequest
 from openapi_client.rest import ApiException
@@ -242,6 +244,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **i_msi** | **str**|  | 
@@ -261,6 +264,7 @@ No authorization required
  - **Accept**: Not defined
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Flow updated |  -  |

@@ -17,22 +17,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-
-from typing import List
-from pydantic import BaseModel, StrictStr
-from pydantic import Field
+from pydantic import BaseModel, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from openapi_client.models.anr_payload import AnrPayload
 from openapi_client.models.data_plane_flow import DataPlaneFlow
-from typing import Dict, Any
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class UeDescriptor(BaseModel):
     """
     UeDescriptor
-    """
+    """ # noqa: E501
     data_plane_flow: DataPlaneFlow
     anr_payload: List[AnrPayload]
     endpoint: StrictStr = Field(description="Endpoint url to send operation to an UE")
@@ -40,7 +35,8 @@ class UeDescriptor(BaseModel):
 
     model_config = {
         "populate_by_name": True,
-        "validate_assignment": True
+        "validate_assignment": True,
+        "protected_namespaces": (),
     }
 
 
@@ -54,16 +50,28 @@ class UeDescriptor(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of UeDescriptor from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
-    def to_dict(self):
-        """Returns the dictionary representation of the model using alias"""
-        _dict = self.model_dump(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+    def to_dict(self) -> Dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
+
+        This has the following differences from calling pydantic's
+        `self.model_dump(by_alias=True)`:
+
+        * `None` is only added to the output dict for nullable fields that
+          were set at model initialization. Other fields with value `None`
+          are ignored.
+        """
+        excluded_fields: Set[str] = set([
+        ])
+
+        _dict = self.model_dump(
+            by_alias=True,
+            exclude=excluded_fields,
+            exclude_none=True,
+        )
         # override the default output from pydantic by calling `to_dict()` of data_plane_flow
         if self.data_plane_flow:
             _dict['data_plane_flow'] = self.data_plane_flow.to_dict()
@@ -77,7 +85,7 @@ class UeDescriptor(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of UeDescriptor from a dict"""
         if obj is None:
             return None
@@ -86,8 +94,8 @@ class UeDescriptor(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "data_plane_flow": DataPlaneFlow.from_dict(obj.get("data_plane_flow")) if obj.get("data_plane_flow") is not None else None,
-            "anr_payload": [AnrPayload.from_dict(_item) for _item in obj.get("anr_payload")] if obj.get("anr_payload") is not None else None,
+            "data_plane_flow": DataPlaneFlow.from_dict(obj["data_plane_flow"]) if obj.get("data_plane_flow") is not None else None,
+            "anr_payload": [AnrPayload.from_dict(_item) for _item in obj["anr_payload"]] if obj.get("anr_payload") is not None else None,
             "endpoint": obj.get("endpoint")
         })
         return _obj

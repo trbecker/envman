@@ -58,7 +58,7 @@ public:
 	/**
 	 * Notifies the observer about a new UE requessting association.
 	 */
-	virtual void associationRequest(const std::shared_ptr<ue_data> ue) = 0;
+	virtual bool associationRequest(const std::shared_ptr<ue_data> ue, const std::string &cell) = 0;
 
 	/** 
 	 * Notifiess the observer about a new UE requesting disassociation.

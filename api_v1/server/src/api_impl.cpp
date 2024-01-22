@@ -165,7 +165,10 @@ namespace org::openapitools::server::api
         ~ManagementApiImpl() override = default;
 
         void u_eimsi_admission_delete(const std::string &iMSI, Pistache::Http::ResponseWriter &response);
-        void u_eimsi_admission_put(const std::string &iMSI, const Ue_descriptor &ueDescriptor, Pistache::Http::ResponseWriter &response);
+        void u_eimsi_admission_put(const std::string &iMSI, 
+			const _UE__iMSI__admission_put_request &uEIMSIAdmissionPutRequest,
+			Pistache::Http::ResponseWriter &response);
+
         void u_eimsi_anr_put(const std::string &iMSI, const _UE__iMSI__anr_put_request &uEIMSIAnrPutRequest, Pistache::Http::ResponseWriter &response);
         void u_eimsi_flow_put(const std::string &iMSI, const _UE__iMSI__flow_put_request &uEIMSIFlowPutRequest, Pistache::Http::ResponseWriter &response);
 
@@ -194,8 +197,12 @@ namespace org::openapitools::server::api
         response.send(Pistache::Http::Code::Ok);
     }
 
-    void ManagementApiImpl::u_eimsi_admission_put(const std::string &iMSI, const Ue_descriptor &ueDescriptor, Pistache::Http::ResponseWriter &response)
+    void ManagementApiImpl::u_eimsi_admission_put(const std::string &iMSI, 
+		const _UE__iMSI__admission_put_request &uEIMSIAdmissionPutRequest,
+		Pistache::Http::ResponseWriter &response)
     {
+        const Ue_descriptor ueDescriptor = uEIMSIAdmissionPutRequest.getUe();
+        const std::string cell = uEIMSIAdmissionPutRequest.getNodeb();
         std::pair<std::string, std::shared_ptr<ue_data>> to_insert;
         to_insert.first = iMSI;
 
@@ -209,15 +216,17 @@ namespace org::openapitools::server::api
         fill_anr_entry(data->anr, anr_vector);
         to_insert.second = data;
 
-        for (auto it = observers->begin(); it != observers->end(); it++)
+        bool accept_admission = true;
+        for (auto it = observers->begin(); accept_admission && it != observers->end(); it++)
             if (observed_event(*it) & ENVMAN_OBSERVE_ADMISSION)
-                observer(*it)->associationRequest(data);
+                accept_admission &= observer(*it)->associationRequest(data, cell);
 
-        ue_map.emplace(to_insert);
-
-        //logger_force(LOGGER_INFO, "UE %s admission accepted", iMSI.c_str());
-
-        response.send(Pistache::Http::Code::Ok);
+        if (accept_admission) {
+            ue_map.emplace(to_insert);
+            response.send(Pistache::Http::Code::Ok);
+        } else {
+            response.send(Pistache::Http::Code::Unauthorized);
+        }
     }
 
     void ManagementApiImpl::u_eimsi_anr_put(const std::string &iMSI, const _UE__iMSI__anr_put_request &uEIMSIAnrPutRequest, Pistache::Http::ResponseWriter &response)

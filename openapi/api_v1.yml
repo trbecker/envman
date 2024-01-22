@@ -127,7 +127,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ue_descriptor"
+              properties:
+                nodeb:
+                  type: string
+                ue:
+                  $ref: "#/components/schemas/ue_descriptor"
       responses:
         "200":
           description: UE is connected

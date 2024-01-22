@@ -15,9 +15,8 @@ Get the list of UEs connected to the NodeB
 
 ### Example
 
+
 ```python
-import time
-import os
 import openapi_client
 from openapi_client.models.ue_get200_response import UEGet200Response
 from openapi_client.rest import ApiException
@@ -47,6 +46,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -63,6 +63,7 @@ No authorization required
  - **Accept**: application/json
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | UE list |  -  |
@@ -76,9 +77,8 @@ Get the information of the UE associated with the NodeB
 
 ### Example
 
+
 ```python
-import time
-import os
 import openapi_client
 from openapi_client.models.ueimsi_info_get200_response import UEIMSIInfoGet200Response
 from openapi_client.rest import ApiException
@@ -110,6 +110,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **i_msi** | **str**|  | 
@@ -128,6 +129,7 @@ No authorization required
  - **Accept**: application/json
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | UE info provided |  -  |

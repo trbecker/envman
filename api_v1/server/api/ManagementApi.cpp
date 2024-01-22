@@ -90,11 +90,11 @@ void ManagementApi::u_eimsi_admission_put_handler(const Pistache::Rest::Request 
     
     // Getting the body param
     
-    Ue_descriptor ueDescriptor;
+    _UE__iMSI__admission_put_request uEIMSIAdmissionPutRequest;
     
     try {
-        nlohmann::json::parse(request.body()).get_to(ueDescriptor);
-        ueDescriptor.validate();
+        nlohmann::json::parse(request.body()).get_to(uEIMSIAdmissionPutRequest);
+        uEIMSIAdmissionPutRequest.validate();
     } catch (std::exception &e) {
         const std::pair<Pistache::Http::Code, std::string> errorInfo = this->handleParsingException(e);
         response.send(errorInfo.first, errorInfo.second);
@@ -102,7 +102,7 @@ void ManagementApi::u_eimsi_admission_put_handler(const Pistache::Rest::Request 
     }
 
     try {
-        this->u_eimsi_admission_put(iMSI, ueDescriptor, response);
+        this->u_eimsi_admission_put(iMSI, uEIMSIAdmissionPutRequest, response);
     } catch (Pistache::Http::HttpError &e) {
         response.send(static_cast<Pistache::Http::Code>(e.code()), e.what());
         return;

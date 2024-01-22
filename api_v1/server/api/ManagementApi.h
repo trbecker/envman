@@ -28,7 +28,7 @@
 #include <optional>
 #include <utility>
 
-#include "Ue_descriptor.h"
+#include "_UE__iMSI__admission_put_request.h"
 #include "_UE__iMSI__anr_put_request.h"
 #include "_UE__iMSI__flow_put_request.h"
 #include <string>
@@ -82,8 +82,8 @@ private:
     /// 
     /// </remarks>
     /// <param name="iMSI"></param>
-    /// <param name="ueDescriptor"></param>
-    virtual void u_eimsi_admission_put(const std::string &iMSI, const org::openapitools::server::model::Ue_descriptor &ueDescriptor, Pistache::Http::ResponseWriter &response) = 0;
+    /// <param name="uEIMSIAdmissionPutRequest"></param>
+    virtual void u_eimsi_admission_put(const std::string &iMSI, const org::openapitools::server::model::_UE__iMSI__admission_put_request &uEIMSIAdmissionPutRequest, Pistache::Http::ResponseWriter &response) = 0;
     /// <summary>
     /// Update ANR data
     /// </summary>

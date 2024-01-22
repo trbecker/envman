@@ -12,6 +12,7 @@ docs/ManagementApi.md
 docs/NodebDescriptor.md
 docs/TestingApi.md
 docs/UEGet200Response.md
+docs/UEIMSIAdmissionPutRequest.md
 docs/UEIMSIAnrPutRequest.md
 docs/UEIMSIFlowPutRequest.md
 docs/UEIMSIInfoGet200Response.md
@@ -34,6 +35,7 @@ openapi_client/models/endpoints_get200_response_endpoints_inner.py
 openapi_client/models/nodeb_descriptor.py
 openapi_client/models/ue_descriptor.py
 openapi_client/models/ue_get200_response.py
+openapi_client/models/ueimsi_admission_put_request.py
 openapi_client/models/ueimsi_anr_put_request.py
 openapi_client/models/ueimsi_flow_put_request.py
 openapi_client/models/ueimsi_info_get200_response.py
