@@ -12,11 +12,9 @@
 #include <envman/environment_manager.h>
 #include <iostream>
 
-#ifdef __linux__
 #include <vector>
 #include <signal.h>
 #include <unistd.h>
-#endif
 
 //#define PISTACHE_SERVER_THREADS 2
 //#define PISTACHE_SERVER_MAX_REQUEST_SIZE 32768
@@ -82,7 +80,6 @@ void MyObserver::disassociationRequest(const std::shared_ptr<ue_data> ue)
     std::cout << "Association request from " << ue->imsi << std::endl;
 }
 
-#ifdef __linux__
     static void sigHandler [[noreturn]] (int sig)
 {
     switch (sig)
@@ -98,8 +95,9 @@ void MyObserver::disassociationRequest(const std::shared_ptr<ue_data> ue)
     exit(0);
 }
 
-static void setUpUnixSignals(std::vector<int> quitSignals)
+static void setUpUnixSignals()
 {
+    auto quitSignals = std::vector<int>({SIGINT, SIGQUIT, SIGTERM, SIGHUP});
     sigset_t blocking_mask;
     sigemptyset(&blocking_mask);
     for (auto sig : quitSignals)
@@ -113,10 +111,10 @@ static void setUpUnixSignals(std::vector<int> quitSignals)
     for (auto sig : quitSignals)
         sigaction(sig, &sa, nullptr);
 }
-#endif
 
 int main()
 {
+    setUpUnixSignals();
     std::shared_ptr<MyObserver> observer = std::make_shared<MyObserver>();
     manager = new EnvironmentManager(8081, 2);
     manager->add_observer(observer, ENVMAN_OBSERVE_ALL);
