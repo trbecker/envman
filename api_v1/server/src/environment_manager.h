@@ -32,6 +32,7 @@ public:
 };
 
 extern std::map<std::string, std::shared_ptr<ue_data>> ue_map;
+extern std::map<std::string, std::string> association_map;
 
 #define ENVMAN_OBSERVE_ANR (1 << 0)
 #define ENVMAN_OBSERVE_FLOW (1 << 1)

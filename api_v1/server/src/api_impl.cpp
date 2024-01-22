@@ -194,6 +194,7 @@ namespace org::openapitools::server::api
                 observer(*it)->disassociationRequest(ue_it->second);
 
         ue_map.erase(iMSI);
+        association_map.erase(iMSI);
         response.send(Pistache::Http::Code::Ok);
     }
 
@@ -223,6 +224,7 @@ namespace org::openapitools::server::api
 
         if (accept_admission) {
             ue_map.emplace(to_insert);
+            association_map.emplace(iMSI, cell);
             response.send(Pistache::Http::Code::Ok);
         } else {
             response.send(Pistache::Http::Code::Unauthorized);
