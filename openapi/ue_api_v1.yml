@@ -7,7 +7,7 @@ servers:
 tags:
   - name: Testing
     description: Testing endpoints
-  - name: UE Management
+  - name: Management
     description: APIs for UE management
 
 paths:
