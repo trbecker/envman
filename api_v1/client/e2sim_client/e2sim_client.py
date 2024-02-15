@@ -85,12 +85,12 @@ if __name__ == '__main__':
     subcommand = sys.argv[1]
 
     if subcommand == 'connect':
-        ue = create_random_ue(sys.argv[3], ['bbu1', 'bbu2', 'bbu3'])
-        print(ue_connect(sys.argv[2], sys.argv[3], ue, 'bbu1'))
+        ue = create_random_ue(sys.argv[3], [f'gnb{i}' for i in range(6)])
+        ue_connect(sys.argv[2], sys.argv[3], ue)
     elif subcommand == 'disconnect':
         ue_disconnect(sys.argv[2], sys.argv[3])
     elif subcommand == 'update-anr':
-        anr_info = create_random_anr_request(['bbu1', 'bbu2', 'bbu3'])
+        anr_info = create_random_anr_request([f'gnb{i}' for i in range(6)])
         ue_anr_update(sys.argv[2], sys.argv[3], anr_info)
     elif subcommand == 'update-flow':
         flow_info = e2sim_client.UEIMSIFlowPutRequest(flow=create_random_data_plane_flow())
