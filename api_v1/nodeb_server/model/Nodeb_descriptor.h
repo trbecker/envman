@@ -19,7 +19,6 @@
 #define Nodeb_descriptor_H_
 
 
-#include <string>
 #include <nlohmann/json.hpp>
 
 namespace org::openapitools::server::model
@@ -61,13 +60,13 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::string getNodebId() const;
-    void setNodebId(std::string const& value);
+    int32_t getNodebId() const;
+    void setNodebId(int32_t const value);
 
     friend  void to_json(nlohmann::json& j, const Nodeb_descriptor& o);
     friend  void from_json(const nlohmann::json& j, Nodeb_descriptor& o);
 protected:
-    std::string m_Nodeb_id;
+    int32_t m_Nodeb_id;
 
     
 };

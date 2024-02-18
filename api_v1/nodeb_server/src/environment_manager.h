@@ -8,7 +8,7 @@
 
 class anr_entry {
 public:
-	std::string bbu_name;
+	int32_t bbu_name;
 	double rsrp;
 	double rsrq;
 	double sinr;
@@ -27,12 +27,12 @@ class ue_data {
 public:
 	std::string imsi;
 	flow_entry flow;
-	std::map<std::string, std::shared_ptr<anr_entry>> anr;
+	std::map<int32_t, std::shared_ptr<anr_entry>> anr;
 	std::string endpoint;
 };
 
 extern std::map<std::string, std::shared_ptr<ue_data>> ue_map;
-extern std::map<std::string, std::string> association_map;
+extern std::map<std::string, int32_t> association_map;
 
 #define ENVMAN_OBSERVE_ANR (1 << 0)
 #define ENVMAN_OBSERVE_FLOW (1 << 1)
@@ -48,7 +48,7 @@ public:
 	 * Notifies the observer about a new ANR update.
 	 */
 	virtual void anrUpdate(const std::string iMSI,
-		const std::map<std::string, std::shared_ptr<anr_entry>> &entries) = 0;
+		const std::map<int32_t, std::shared_ptr<anr_entry>> &entries) = 0;
 
 	/**
 	 * Notifies the observer about a new Flow update.
@@ -59,7 +59,7 @@ public:
 	/**
 	 * Notifies the observer about a new UE requessting association.
 	 */
-	virtual bool associationRequest(const std::shared_ptr<ue_data> ue, const std::string &cell) = 0;
+	virtual bool associationRequest(const std::shared_ptr<ue_data> ue, const int32_t &cell) = 0;
 
 	/** 
 	 * Notifiess the observer about a new UE requesting disassociation.

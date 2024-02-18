@@ -21,7 +21,7 @@ namespace org::openapitools::server::model
 
 _UE__iMSI__admission_put_request::_UE__iMSI__admission_put_request()
 {
-    m_Nodeb = "";
+    m_Nodeb = 0;
     m_NodebIsSet = false;
     m_UeIsSet = false;
     
@@ -94,11 +94,11 @@ void from_json(const nlohmann::json& j, _UE__iMSI__admission_put_request& o)
     
 }
 
-std::string _UE__iMSI__admission_put_request::getNodeb() const
+int32_t _UE__iMSI__admission_put_request::getNodeb() const
 {
     return m_Nodeb;
 }
-void _UE__iMSI__admission_put_request::setNodeb(std::string const& value)
+void _UE__iMSI__admission_put_request::setNodeb(int32_t const value)
 {
     m_Nodeb = value;
     m_NodebIsSet = true;

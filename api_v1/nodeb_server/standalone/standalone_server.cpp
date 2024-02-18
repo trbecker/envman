@@ -69,7 +69,7 @@ void MyObserver::flowUpdate(const std::string iMSI, const flow_entry &entry) {
               << " latency " << entry.latency << std::endl;
 }
 
-bool MyObserver::associationRequest(const std::shared_ptr<ue_data> ue, const std::string &cell)
+bool MyObserver::associationRequest(const std::shared_ptr<ue_data> ue, const int32_t &cell)
 {
     std::cout << "Association request from " << ue->imsi << " to cell " << cell << std::endl;
     return true;

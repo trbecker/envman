@@ -32,7 +32,7 @@ static Pistache::Http::Endpoint *httpEndpoint;
 
 using namespace org::openapitools::server::model;
 
-void fill_anr_entry(std::map<std::string, std::shared_ptr<anr_entry>> &anr_map, const std::vector<Anr_payload> &anr_vector)
+void fill_anr_entry(std::map<int32_t, std::shared_ptr<anr_entry>> &anr_map, const std::vector<Anr_payload> &anr_vector)
 {
     anr_map.clear();
 
@@ -46,7 +46,7 @@ void fill_anr_entry(std::map<std::string, std::shared_ptr<anr_entry>> &anr_map, 
         entry->cqi = it->getCQI();
         entry->bler = it->getBLER();
 
-        std::pair<std::string, std::shared_ptr<anr_entry>> to_insert;
+        std::pair<int32_t, std::shared_ptr<anr_entry>> to_insert;
         to_insert.first = entry->bbu_name;
         to_insert.second = entry;
 
@@ -203,7 +203,7 @@ namespace org::openapitools::server::api
 		Pistache::Http::ResponseWriter &response)
     {
         const Ue_descriptor ueDescriptor = uEIMSIAdmissionPutRequest.getUe();
-        const std::string cell = uEIMSIAdmissionPutRequest.getNodeb();
+        const int32_t cell = uEIMSIAdmissionPutRequest.getNodeb();
         std::pair<std::string, std::shared_ptr<ue_data>> to_insert;
         to_insert.first = iMSI;
 

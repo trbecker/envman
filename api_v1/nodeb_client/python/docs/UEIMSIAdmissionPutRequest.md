@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**nodeb** | **str** |  | [optional] 
+**nodeb** | **int** |  | [optional] 
 **ue** | [**UeDescriptor**](UeDescriptor.md) |  | [optional] 
 
 ## Example

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**nodeb_id** | **str** |  | 
+**nodeb_id** | **int** |  | 
 
 ## Example
 

@@ -6,7 +6,7 @@
 #include "api_impl.h"
 
 std::map<std::string, std::shared_ptr<ue_data>> ue_map;
-std::map<std::string, std::string> association_map;
+std::map<std::string, int32_t> association_map;
 
 EnvironmentManager::EnvironmentManager(uint16_t port, uint16_t threads) :
     port(port), threads(threads)

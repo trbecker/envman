@@ -1,6 +1,5 @@
 .dockerignore
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 Dockerfile
 README.md
@@ -19,6 +18,5 @@ ue_server/models/__init__.py
 ue_server/models/base_model.py
 ue_server/openapi/openapi.yaml
 ue_server/test/__init__.py
-ue_server/test/test_default_controller.py
 ue_server/typing_utils.py
 ue_server/util.py

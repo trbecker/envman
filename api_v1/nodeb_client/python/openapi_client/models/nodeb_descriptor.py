@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, StrictStr
+from pydantic import BaseModel, StrictInt
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +26,7 @@ class NodebDescriptor(BaseModel):
     """
     NodebDescriptor
     """ # noqa: E501
-    nodeb_id: StrictStr
+    nodeb_id: StrictInt
     __properties: ClassVar[List[str]] = ["nodeb_id"]
 
     model_config = {

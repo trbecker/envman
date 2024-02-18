@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, StrictStr
+from pydantic import BaseModel, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.ue_descriptor import UeDescriptor
 from typing import Optional, Set
@@ -27,7 +27,7 @@ class UEIMSIAdmissionPutRequest(BaseModel):
     """
     UEIMSIAdmissionPutRequest
     """ # noqa: E501
-    nodeb: Optional[StrictStr] = None
+    nodeb: Optional[StrictInt] = None
     ue: Optional[UeDescriptor] = None
     __properties: ClassVar[List[str]] = ["nodeb", "ue"]
 

@@ -20,7 +20,6 @@
 
 
 #include "Ue_descriptor.h"
-#include <string>
 #include <nlohmann/json.hpp>
 
 namespace org::openapitools::server::model
@@ -62,8 +61,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::string getNodeb() const;
-    void setNodeb(std::string const& value);
+    int32_t getNodeb() const;
+    void setNodeb(int32_t const value);
     bool nodebIsSet() const;
     void unsetNodeb();
     /// <summary>
@@ -77,7 +76,7 @@ public:
     friend  void to_json(nlohmann::json& j, const _UE__iMSI__admission_put_request& o);
     friend  void from_json(const nlohmann::json& j, _UE__iMSI__admission_put_request& o);
 protected:
-    std::string m_Nodeb;
+    int32_t m_Nodeb;
     bool m_NodebIsSet;
     org::openapitools::server::model::Ue_descriptor m_Ue;
     bool m_UeIsSet;

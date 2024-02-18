@@ -21,7 +21,7 @@ namespace org::openapitools::server::model
 
 Nodeb_descriptor::Nodeb_descriptor()
 {
-    m_Nodeb_id = "";
+    m_Nodeb_id = 0;
     
 }
 
@@ -77,11 +77,11 @@ void from_json(const nlohmann::json& j, Nodeb_descriptor& o)
     
 }
 
-std::string Nodeb_descriptor::getNodebId() const
+int32_t Nodeb_descriptor::getNodebId() const
 {
     return m_Nodeb_id;
 }
-void Nodeb_descriptor::setNodebId(std::string const& value)
+void Nodeb_descriptor::setNodebId(int32_t const value)
 {
     m_Nodeb_id = value;
 }
