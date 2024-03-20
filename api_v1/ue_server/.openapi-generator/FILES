@@ -16,6 +16,9 @@ ue_server/controllers/security_controller.py
 ue_server/encoder.py
 ue_server/models/__init__.py
 ue_server/models/base_model.py
+ue_server/models/cell_descriptor.py
+ue_server/models/cell_gnb_id_power_put_request.py
+ue_server/models/ueimsi_handover_put_request.py
 ue_server/openapi/openapi.yaml
 ue_server/test/__init__.py
 ue_server/typing_utils.py

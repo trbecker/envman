@@ -10,6 +10,18 @@ tags:
   - name: Management
     description: APIs for UE management
 
+components:
+  schemas:
+    cell_descriptor:
+      type: object
+      properties:
+        mnc:
+          type: integer
+        mcc:
+          type: integer
+        nodeb_id:
+          type: integer
+
 paths:
   /test:
     get:
@@ -38,6 +50,14 @@ paths:
           schema:
             type: string
             description: International Mobile Subscriber Identification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                target_cell:
+                  $ref: "#/components/schemas/cell_descriptor"
       responses:
         "200": 
           description: Handover received
@@ -54,3 +74,25 @@ paths:
       responses:
         "200": 
           description: Disconnected
+
+  /cell/{gnb_id}/power:
+    put:
+      parameters:
+        - name: gnb_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                target_cell:
+                  $ref: "#/components/schemas/cell_descriptor"
+                target_power:
+                  type: number
+      responses:
+        "202":
+          description: "Power set"

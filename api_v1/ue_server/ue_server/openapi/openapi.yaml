@@ -38,6 +38,12 @@ paths:
           description: International Mobile Subscriber Identification
           type: string
         style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_UE__iMSI__handover_put_request'
+        required: true
       responses:
         "200":
           description: Handover received
@@ -58,6 +64,27 @@ paths:
         "200":
           description: UE exists
       x-openapi-router-controller: ue_server.controllers.default_controller
+  /cell/{gnb_id}/power:
+    put:
+      operationId: cell_gnb_id_power_put
+      parameters:
+      - explode: false
+        in: path
+        name: gnb_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_cell__gnb_id__power_put_request'
+        required: true
+      responses:
+        "202":
+          description: Power set
+      x-openapi-router-controller: ue_server.controllers.default_controller
   /test:
     get:
       operationId: test_get
@@ -66,4 +93,30 @@ paths:
           description: API is reachable
       x-openapi-router-controller: ue_server.controllers.default_controller
 components:
-  schemas: {}
+  schemas:
+    cell_descriptor:
+      properties:
+        mnc:
+          title: mnc
+          type: integer
+        mcc:
+          title: mcc
+          type: integer
+        nodeb_id:
+          title: nodeb_id
+          type: integer
+      title: cell_descriptor
+      type: object
+    _UE__iMSI__handover_put_request:
+      properties:
+        target_cell:
+          $ref: '#/components/schemas/cell_descriptor'
+      title: _UE__iMSI__handover_put_request
+    _cell__gnb_id__power_put_request:
+      properties:
+        target_cell:
+          $ref: '#/components/schemas/cell_descriptor'
+        target_power:
+          title: target_power
+          type: number
+      title: _cell__gnb_id__power_put_request

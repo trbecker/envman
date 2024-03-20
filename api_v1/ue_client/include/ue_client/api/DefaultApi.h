@@ -21,7 +21,9 @@
 
 
 #include "ue_client/ApiClient.h"
-#include "ue_client/ModelBase.h"
+
+#include "ue_client/model/_UE__iMSI__handover_put_request.h"
+#include "ue_client/model/_cell__gnb_id__power_put_request.h"
 #include <cpprest/details/basic_types.h>
 #include <boost/optional.hpp>
 
@@ -48,6 +50,18 @@ public:
     /// <remarks>
     /// 
     /// </remarks>
+    /// <param name="gnbId"></param>
+    /// <param name="cellGnbIdPowerPutRequest"></param>
+    pplx::task<void> cellGnbIdPowerPut(
+        int32_t gnbId,
+        std::shared_ptr<_cell__gnb_id__power_put_request> cellGnbIdPowerPutRequest
+    ) const;
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// 
+    /// </remarks>
     pplx::task<void> testGet(
     ) const;
     /// <summary>
@@ -67,8 +81,10 @@ public:
     /// 
     /// </remarks>
     /// <param name="iMSI"></param>
+    /// <param name="uEIMSIHandoverPutRequest"></param>
     pplx::task<void> uEIMSIHandoverPut(
-        utility::string_t iMSI
+        utility::string_t iMSI,
+        std::shared_ptr<_UE__iMSI__handover_put_request> uEIMSIHandoverPutRequest
     ) const;
     /// <summary>
     /// 

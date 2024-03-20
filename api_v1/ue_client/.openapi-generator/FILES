@@ -13,6 +13,9 @@ include/ue_client/ModelBase.h
 include/ue_client/MultipartFormData.h
 include/ue_client/Object.h
 include/ue_client/api/DefaultApi.h
+include/ue_client/model/Cell_descriptor.h
+include/ue_client/model/_UE__iMSI__handover_put_request.h
+include/ue_client/model/_cell__gnb_id__power_put_request.h
 src/ApiClient.cpp
 src/ApiConfiguration.cpp
 src/ApiException.cpp
@@ -22,3 +25,6 @@ src/ModelBase.cpp
 src/MultipartFormData.cpp
 src/Object.cpp
 src/api/DefaultApi.cpp
+src/model/Cell_descriptor.cpp
+src/model/_UE__iMSI__handover_put_request.cpp
+src/model/_cell__gnb_id__power_put_request.cpp
