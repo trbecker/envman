@@ -93,6 +93,7 @@ paths:
                   $ref: "#/components/schemas/cell_descriptor"
                 target_power:
                   type: number
+                  description: Target power in dBm
       responses:
         "202":
           description: "Power set"

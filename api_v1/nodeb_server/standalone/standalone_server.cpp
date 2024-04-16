@@ -32,7 +32,7 @@ public:
      * Notifies the observer about a new ANR update.
      */
     void anrUpdate(const std::string iMSI,
-        const std::map<std::string, std::shared_ptr<anr_entry>> &entries);
+                   const std::map<int32_t, std::shared_ptr<anr_entry>> &entries);
 
     /**
      * Notifies the observer about a new Flow update.
@@ -42,7 +42,7 @@ public:
     /**
      * Notifies the observer about a new UE requessting association.
      */
-    bool associationRequest(const std::shared_ptr<ue_data> ue, const std::string &cell);
+    bool associationRequest(const std::shared_ptr<ue_data> ue, const int32_t &cell);
 
     /**
      * Notifiess the observer about a new UE requesting disassociation.
@@ -57,7 +57,7 @@ MyObserver::~MyObserver()
 { /* pass */ }
 
 void MyObserver::anrUpdate(const std::string iMSI,
-                           const std::map<std::string, std::shared_ptr<anr_entry>> &entries)
+                           const std::map<int32_t, std::shared_ptr<anr_entry>> &entries)
 {
     std::cout << "ANR update from " << iMSI;
     std::cout << std::endl;
