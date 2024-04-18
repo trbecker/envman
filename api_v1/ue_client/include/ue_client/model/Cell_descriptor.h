@@ -21,6 +21,7 @@
 
 #include "ue_client/ModelBase.h"
 
+#include <cpprest/details/basic_types.h>
 
 namespace org {
 namespace openapitools {
@@ -55,20 +56,20 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    int32_t getMnc() const;
+    utility::string_t getMnc() const;
     bool mncIsSet() const;
     void unsetMnc();
 
-    void setMnc(int32_t value);
+    void setMnc(const utility::string_t& value);
 
     /// <summary>
     /// 
     /// </summary>
-    int32_t getMcc() const;
+    utility::string_t getMcc() const;
     bool mccIsSet() const;
     void unsetMcc();
 
-    void setMcc(int32_t value);
+    void setMcc(const utility::string_t& value);
 
     /// <summary>
     /// 
@@ -81,9 +82,9 @@ public:
 
 
 protected:
-    int32_t m_Mnc;
+    utility::string_t m_Mnc;
     bool m_MncIsSet;
-    int32_t m_Mcc;
+    utility::string_t m_Mcc;
     bool m_MccIsSet;
     int32_t m_Nodeb_id;
     bool m_Nodeb_idIsSet;

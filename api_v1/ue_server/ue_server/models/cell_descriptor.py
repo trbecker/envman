@@ -16,15 +16,15 @@ class CellDescriptor(Model):
         """CellDescriptor - a model defined in OpenAPI
 
         :param mnc: The mnc of this CellDescriptor.  # noqa: E501
-        :type mnc: int
+        :type mnc: str
         :param mcc: The mcc of this CellDescriptor.  # noqa: E501
-        :type mcc: int
+        :type mcc: str
         :param nodeb_id: The nodeb_id of this CellDescriptor.  # noqa: E501
         :type nodeb_id: int
         """
         self.openapi_types = {
-            'mnc': int,
-            'mcc': int,
+            'mnc': str,
+            'mcc': str,
             'nodeb_id': int
         }
 
@@ -50,43 +50,43 @@ class CellDescriptor(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def mnc(self) -> int:
+    def mnc(self) -> str:
         """Gets the mnc of this CellDescriptor.
 
 
         :return: The mnc of this CellDescriptor.
-        :rtype: int
+        :rtype: str
         """
         return self._mnc
 
     @mnc.setter
-    def mnc(self, mnc: int):
+    def mnc(self, mnc: str):
         """Sets the mnc of this CellDescriptor.
 
 
         :param mnc: The mnc of this CellDescriptor.
-        :type mnc: int
+        :type mnc: str
         """
 
         self._mnc = mnc
 
     @property
-    def mcc(self) -> int:
+    def mcc(self) -> str:
         """Gets the mcc of this CellDescriptor.
 
 
         :return: The mcc of this CellDescriptor.
-        :rtype: int
+        :rtype: str
         """
         return self._mcc
 
     @mcc.setter
-    def mcc(self, mcc: int):
+    def mcc(self, mcc: str):
         """Sets the mcc of this CellDescriptor.
 
 
         :param mcc: The mcc of this CellDescriptor.
-        :type mcc: int
+        :type mcc: str
         """
 
         self._mcc = mcc

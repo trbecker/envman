@@ -22,9 +22,9 @@ namespace model {
 
 Cell_descriptor::Cell_descriptor()
 {
-    m_Mnc = 0;
+    m_Mnc = utility::conversions::to_string_t("");
     m_MncIsSet = false;
-    m_Mcc = 0;
+    m_Mcc = utility::conversions::to_string_t("");
     m_MccIsSet = false;
     m_Nodeb_id = 0;
     m_Nodeb_idIsSet = false;
@@ -69,7 +69,7 @@ bool Cell_descriptor::fromJson(const web::json::value& val)
         const web::json::value& fieldValue = val.at(utility::conversions::to_string_t(U("mnc")));
         if(!fieldValue.is_null())
         {
-            int32_t refVal_setMnc;
+            utility::string_t refVal_setMnc;
             ok &= ModelBase::fromJson(fieldValue, refVal_setMnc);
             setMnc(refVal_setMnc);
         }
@@ -79,7 +79,7 @@ bool Cell_descriptor::fromJson(const web::json::value& val)
         const web::json::value& fieldValue = val.at(utility::conversions::to_string_t(U("mcc")));
         if(!fieldValue.is_null())
         {
-            int32_t refVal_setMcc;
+            utility::string_t refVal_setMcc;
             ok &= ModelBase::fromJson(fieldValue, refVal_setMcc);
             setMcc(refVal_setMcc);
         }
@@ -129,13 +129,13 @@ bool Cell_descriptor::fromMultiPart(std::shared_ptr<MultipartFormData> multipart
 
     if(multipart->hasContent(utility::conversions::to_string_t(U("mnc"))))
     {
-        int32_t refVal_setMnc;
+        utility::string_t refVal_setMnc;
         ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(U("mnc"))), refVal_setMnc );
         setMnc(refVal_setMnc);
     }
     if(multipart->hasContent(utility::conversions::to_string_t(U("mcc"))))
     {
-        int32_t refVal_setMcc;
+        utility::string_t refVal_setMcc;
         ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(U("mcc"))), refVal_setMcc );
         setMcc(refVal_setMcc);
     }
@@ -148,12 +148,12 @@ bool Cell_descriptor::fromMultiPart(std::shared_ptr<MultipartFormData> multipart
     return ok;
 }
 
-int32_t Cell_descriptor::getMnc() const
+utility::string_t Cell_descriptor::getMnc() const
 {
     return m_Mnc;
 }
 
-void Cell_descriptor::setMnc(int32_t value)
+void Cell_descriptor::setMnc(const utility::string_t& value)
 {
     m_Mnc = value;
     m_MncIsSet = true;
@@ -168,12 +168,12 @@ void Cell_descriptor::unsetMnc()
 {
     m_MncIsSet = false;
 }
-int32_t Cell_descriptor::getMcc() const
+utility::string_t Cell_descriptor::getMcc() const
 {
     return m_Mcc;
 }
 
-void Cell_descriptor::setMcc(int32_t value)
+void Cell_descriptor::setMcc(const utility::string_t& value)
 {
     m_Mcc = value;
     m_MccIsSet = true;

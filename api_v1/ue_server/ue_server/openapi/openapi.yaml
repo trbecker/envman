@@ -98,10 +98,10 @@ components:
       properties:
         mnc:
           title: mnc
-          type: integer
+          type: string
         mcc:
           title: mcc
-          type: integer
+          type: string
         nodeb_id:
           title: nodeb_id
           type: integer
@@ -117,6 +117,7 @@ components:
         target_cell:
           $ref: '#/components/schemas/cell_descriptor'
         target_power:
+          description: Target power in dBm
           title: target_power
           type: number
       title: _cell__gnb_id__power_put_request
