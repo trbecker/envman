@@ -17,12 +17,12 @@ json = "{}"
 # create an instance of NodebDescriptor from a JSON string
 nodeb_descriptor_instance = NodebDescriptor.from_json(json)
 # print the JSON string representation of the object
-print NodebDescriptor.to_json()
+print(NodebDescriptor.to_json())
 
 # convert the object into a dict
 nodeb_descriptor_dict = nodeb_descriptor_instance.to_dict()
 # create an instance of NodebDescriptor from a dict
-nodeb_descriptor_form_dict = nodeb_descriptor.from_dict(nodeb_descriptor_dict)
+nodeb_descriptor_from_dict = NodebDescriptor.from_dict(nodeb_descriptor_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

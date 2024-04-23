@@ -71,6 +71,7 @@ class CellGnbIdPowerPutRequest(Model):
     def target_power(self) -> float:
         """Gets the target_power of this CellGnbIdPowerPutRequest.
 
+        Target power in dBm  # noqa: E501
 
         :return: The target_power of this CellGnbIdPowerPutRequest.
         :rtype: float
@@ -81,6 +82,7 @@ class CellGnbIdPowerPutRequest(Model):
     def target_power(self, target_power: float):
         """Sets the target_power of this CellGnbIdPowerPutRequest.
 
+        Target power in dBm  # noqa: E501
 
         :param target_power: The target_power of this CellGnbIdPowerPutRequest.
         :type target_power: float

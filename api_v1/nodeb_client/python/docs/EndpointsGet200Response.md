@@ -17,12 +17,12 @@ json = "{}"
 # create an instance of EndpointsGet200Response from a JSON string
 endpoints_get200_response_instance = EndpointsGet200Response.from_json(json)
 # print the JSON string representation of the object
-print EndpointsGet200Response.to_json()
+print(EndpointsGet200Response.to_json())
 
 # convert the object into a dict
 endpoints_get200_response_dict = endpoints_get200_response_instance.to_dict()
 # create an instance of EndpointsGet200Response from a dict
-endpoints_get200_response_form_dict = endpoints_get200_response.from_dict(endpoints_get200_response_dict)
+endpoints_get200_response_from_dict = EndpointsGet200Response.from_dict(endpoints_get200_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

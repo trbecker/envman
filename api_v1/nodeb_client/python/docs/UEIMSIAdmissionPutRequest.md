@@ -18,12 +18,12 @@ json = "{}"
 # create an instance of UEIMSIAdmissionPutRequest from a JSON string
 ueimsi_admission_put_request_instance = UEIMSIAdmissionPutRequest.from_json(json)
 # print the JSON string representation of the object
-print UEIMSIAdmissionPutRequest.to_json()
+print(UEIMSIAdmissionPutRequest.to_json())
 
 # convert the object into a dict
 ueimsi_admission_put_request_dict = ueimsi_admission_put_request_instance.to_dict()
 # create an instance of UEIMSIAdmissionPutRequest from a dict
-ueimsi_admission_put_request_form_dict = ueimsi_admission_put_request.from_dict(ueimsi_admission_put_request_dict)
+ueimsi_admission_put_request_from_dict = UEIMSIAdmissionPutRequest.from_dict(ueimsi_admission_put_request_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

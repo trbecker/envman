@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.ue_descriptor import UeDescriptor
 from typing import Optional, Set
@@ -30,11 +30,11 @@ class UEIMSIInfoGet200Response(BaseModel):
     info: Optional[UeDescriptor] = None
     __properties: ClassVar[List[str]] = ["info"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
